@@ -11,7 +11,7 @@ publishDir            = "public"				# 站点静态文件保存目录
 [params]
     author        = "Chet"
     description   = "🍬一颗跳跳糖 | 实用软件与精品网站导航"
-    upload        = ""									# 左侧导航栏的"网站提交"，留空则不显示
+    upload        = "https://github.com/qiect/tttnav/issues"		# 左侧导航栏的"网站提交"，留空则不显示
     about         = "about/"							# 左侧导航栏的"关于导航"页面(模板用absURL自动拼baseURL)
     repository    = "https://github.com/shenweiyan/WebStack-Hugo"
     enablePreLoad = true					# 网站完全打开前预加载动画

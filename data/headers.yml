@@ -1,12 +1,12 @@
 - item: 首页
   icon: fa fa-home
-  link: "/"
+  link: ""
 
 - item: 关于
   icon: fa fa-cog
-  link: "/about/"
+  link: "about/"
   list:
     - name: 关于本站
-      url: /about/
+      url: about/
     - name: 源码
-      url: https://github.com/shenweiyan/WebStack-Hugo
+      url: https://github.com/qiect/tttnav
