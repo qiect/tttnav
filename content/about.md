@@ -10,4 +10,4 @@ draft: false
 
 本站数据采集自互联网公开导航站点，仅作分类整理与导航分享之用。如果本站收录的内容侵犯了你的权益，请联系删除。
 
-本站基于开源主题 [WebStack-Hugo](https://github.com/shenweiyan/WebStack-Hugo) 构建，感谢原作者的开源贡献。
+本站基于开源主题 [WebStack-Hugo](https://github.com/qiect/tttnav) 构建，感谢原作者的开源贡献。

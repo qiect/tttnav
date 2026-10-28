@@ -8,5 +8,4 @@
   list:
     - name: 关于本站
       url: about/
-    - name: 源码
-      url: https://github.com/qiect/tttnav
+

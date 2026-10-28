@@ -93,7 +93,7 @@ jobs:
           hugo \
             --gc \
             --minify \
-            --baseURL "https://chetapp.top/"
+            --baseURL "https://chetapp.top/tttnav/"
 
       - name: Prepare Docker build context
         run: |
