@@ -1,0 +1,51 @@
+baseURL               = "http://localhost:1313/"
+languageCode          = "zh-CN"
+title                 = "一颗跳跳糖"
+theme                 = "WebStack-Hugo"
+preserveTaxonomyNames = true
+disablePathToLower    = true
+hasCJKLanguage        = true
+publishDir            = "public"				# 站点静态文件保存目录
+
+
+[params]
+    author        = "Chet"
+    description   = "🍬一颗跳跳糖 | 实用软件与精品网站导航"
+    upload        = ""									# 左侧导航栏的"网站提交"，留空则不显示
+    about         = "about/"							# 左侧导航栏的"关于导航"页面(模板用absURL自动拼baseURL)
+    repository    = "https://github.com/shenweiyan/WebStack-Hugo"
+    enablePreLoad = true					# 网站完全打开前预加载动画
+    textPreLoad   = "一颗跳跳糖"				# 预加载的动画文字, 只有当enablePreLoad=true时生效
+    expandSidebar = false					# 默认展开左侧边导航栏
+    logosPath     = "assets/images/logos"			# 网站每个导航地址logo存放地址(模板用absURL自动拼baseURL)
+    defaultLogo   = "assets/images/logos/default.webp"		# logo图片资源不存在或者错误时, 默认显示的logo; 该参数如为空,将会一直加载对应的logo,直至成功
+    nightMode     = false					# 默认站点为深色(夜间)模式
+    nightStart    = 19						# 自动夜间模式起始小时(本地时间)
+    nightEnd      = 7						# 自动夜间模式结束小时(本地时间)，支持跨午夜
+    yiyan         = true                         		# 默认启用一言服务
+    fancybox      = true                                        # 使用 Fancybox 实现图片灯箱/放大功能
+
+[params.seo]
+    baiduhmid       = ''									# 百度统计 hm.src 的 ID
+    baiduSiteVer    = ''									# 百度HTML标签验证(baidu-site-verification)
+    tj51laid        = ''                        		# 51.LA 网站统计
+    tj51lack        = ''
+    GoogleAdsClient = ''					# Google AdSense
+
+[params.qweather]
+    key = ""
+
+[params.images]
+    favicon           = "assets/images/bi-favicon.svg"
+    searchImageL      = "assets/images/bg-dna.jpg"		# 搜索部分浅色背景图
+    searchImageD      = "assets/images/bg-dna.jpg"		# 搜索部分深色背景图
+    logoExpandLight   = "assets/images/bi-expand-dark.svg"
+    logoExpandDark    = "assets/images/bi-expand-light.svg"
+    logoCollapseLight = "assets/images/bi.svg"
+    logoCollapseDark  = "assets/images/bi.svg"
+
+[markup.goldmark.renderer]
+    unsafe = true
+
+[params.footer]
+    copyright = '本站内容源自互联网，仅作导航分享之用，如有侵权请联系删除。<br/>&copy; {year} Chet · 🍬一颗跳跳糖 <br/>'

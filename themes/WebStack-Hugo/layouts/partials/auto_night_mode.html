@@ -1,0 +1,15 @@
+<!-- 按本地时间自动切换日间/夜间模式（用户本会话内手动切换优先） -->
+<script>
+(function () {
+    var start = {{ $.Site.Params.nightStart | default 19 }};
+    var end = {{ $.Site.Params.nightEnd | default 7 }};
+    var h = new Date().getHours();
+    var wantNight = (start <= end) ? (h >= start && h < end) : (h >= start || h < end);
+    var cur = document.cookie.replace(/(?:(?:^|.*;\s*)night\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+    if (cur === '') {
+        document.cookie = 'night=' + (wantNight ? 1 : 0) + ';path=/';
+        document.body.classList.remove('io-grey-mode', 'io-black-mode');
+        document.body.classList.add(wantNight ? 'io-black-mode' : 'io-grey-mode');
+    }
+})();
+</script>

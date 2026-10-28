@@ -1,0 +1,40 @@
+{{ partial "header.html" . }}
+
+{{ partial "sidebar.html" . }}
+
+{{ partial "content_header.html" . }}
+
+<div id="content" class="content-site customize-site">
+    <div class="d-flex flex-fill">
+        <h4 class="text-gray text-lg mb-4">
+            <i class="site-tag iconfont icon-tag icon-lg mr-1" id="about-tag"></i>
+            {{ .Title }}
+        </h4>
+        <div class="flex-fill"></div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="card io-about-card mb-4">
+                <div class="card-body">
+                    {{ .Content | markdownify | safeHTML }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .io-about-card{font-size:14px;}
+    .io-about-card .card-body{padding:1.25rem;line-height:1.8;}
+    .io-about-card a{color:#007bff;}
+    .io-about-card a:hover{color:#f1404b;}
+    .io-about-card h4,.io-about-card h5{margin:15px 0;}
+    .io-about-card p{margin:10px 0;}
+    .io-about-card img{max-width:100%;}
+</style>
+
+{{ partial "content_footer.html" . }}
+
+{{ partial "modal_search.html" . }}
+
+{{ partial "footer.html" . }}

@@ -1,0 +1,140 @@
+name: Deploy tttnav
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  build-pages:
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.152.2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+
+      - name: Build with Hugo
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ steps.pages.outputs.base_url }}/"
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./public
+
+  deploy-pages:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build-pages
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  deploy-to-server:
+    name: Deploy to Aliyun Server (Docker)
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: 0.152.2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Build with Hugo for Aliyun
+        env:
+          HUGO_ENVIRONMENT: production
+          HUGO_ENV: production
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "https://chetapp.top/"
+
+      - name: Prepare Docker build context
+        run: |
+          cp Dockerfile public/
+          cp nginx.conf public/
+
+      - name: Deploy to server via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 39.107.53.196
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            sudo docker stop tttnav 2>/dev/null || true
+            sudo docker rm tttnav 2>/dev/null || true
+            sudo docker rmi tttnav:latest 2>/dev/null || true
+            rm -rf /tmp/tttnav
+            mkdir -p /tmp/tttnav
+
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: 39.107.53.196
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          source: "public/*"
+          target: "/tmp/tttnav"
+          strip_components: 1
+
+      - name: Build and run Docker container
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 39.107.53.196
+          username: ${{ secrets.SERVER_USERNAME }}
+          password: ${{ secrets.SERVER_PASSWORD }}
+          script: |
+            cd /tmp/tttnav
+            sudo docker build -t tttnav:latest .
+            sudo docker run -d \
+              --name tttnav \
+              --restart always \
+              -p 8001:80 \
+              tttnav:latest
+            echo "tttnav deployed successfully on port 8001!"

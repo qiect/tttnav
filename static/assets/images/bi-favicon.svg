@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <!-- 🍬一颗跳跳糖 · favicon（对应 bi-favicon.png，转 png 建议 64x64 / 128x128） -->
+  <defs>
+    <radialGradient id="candyBody" cx="35%" cy="30%" r="85%">
+      <stop offset="0%" stop-color="#ffa8c0"/>
+      <stop offset="55%" stop-color="#ff5c8a"/>
+      <stop offset="100%" stop-color="#f1404b"/>
+    </radialGradient>
+    <linearGradient id="candyWrap" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#ff7ba3"/>
+      <stop offset="100%" stop-color="#e83e6c"/>
+    </linearGradient>
+  </defs>
+
+  <!-- 左侧包装纸 -->
+  <path d="M62 100 C48 76 28 66 8 70 L22 100 L8 130 C28 134 48 124 62 100 Z" fill="url(#candyWrap)"/>
+  <!-- 右侧包装纸 -->
+  <path d="M138 100 C152 76 172 66 192 70 L178 100 L192 130 C172 134 152 124 138 100 Z" fill="url(#candyWrap)"/>
+
+  <!-- 糖体 -->
+  <ellipse cx="100" cy="100" rx="46" ry="40" fill="url(#candyBody)"/>
+
+  <!-- 螺旋条纹 -->
+  <path d="M70 68 q18 20 6 52" stroke="#ffffff" stroke-width="8" fill="none" opacity=".55" stroke-linecap="round"/>
+  <path d="M94 63 q15 26 2 64" stroke="#ffffff" stroke-width="6" fill="none" opacity=".38" stroke-linecap="round"/>
+
+  <!-- 高光 -->
+  <ellipse cx="84" cy="83" rx="17" ry="10" fill="#ffffff" opacity=".5" transform="rotate(-28 84 83)"/>
+</svg>
